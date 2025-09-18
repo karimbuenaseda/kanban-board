@@ -1,17 +1,14 @@
-### STAGE 1: Build ###
-FROM node:12.7-alpine AS build
+FROM node:12.7-alpine
+
 WORKDIR /usr/src/app
+
 COPY package.json ./
 RUN npm config rm proxy
 RUN npm config rm https-proxy
 RUN npm install
+
 COPY . .
+
 EXPOSE 4200
 
 CMD ["npm", "start"]
-
-### STAGE 2: Run ###
-FROM nginx:1.17.1-alpine
-COPY default.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /usr/src/app/dist/kanban-ui /usr/share/nginx/html
-EXPOSE 80

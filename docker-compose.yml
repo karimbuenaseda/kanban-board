@@ -31,8 +31,11 @@ services:
   kanban-ui:
     build: ./kanban-ui
     container_name: kanban-ui
+    volumes:
+      - ./kanban-ui:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
-      - 4200:80
+      - 4200:4200
     links:
       - kanban-app
 
