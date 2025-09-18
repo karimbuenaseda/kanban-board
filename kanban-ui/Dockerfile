@@ -6,7 +6,9 @@ RUN npm config rm proxy
 RUN npm config rm https-proxy
 RUN npm install
 COPY . .
-RUN npm run build
+EXPOSE 4200
+
+CMD ["npm", "start"]
 
 ### STAGE 2: Run ###
 FROM nginx:1.17.1-alpine
